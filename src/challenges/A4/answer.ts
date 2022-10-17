@@ -30,40 +30,39 @@
 
 // ✅ DONE
 
-// export default function ({ messages }: { messages: Message[] }): DayMessages[] {
-//   const response: DayMessages[] = [];
-//   messages.forEach((msg) => {
-//     let msgDate = new Date(msg.sentAt);
-//     let year = msgDate.getUTCFullYear();
-//     let month = msgDate.getUTCMonth();
-//     let day = msgDate.getUTCDate();
+export default function ({ messages }: { messages: Message[] }): DayMessages[] {
+  const response: DayMessages[] = [];
+  messages.forEach((msg) => {
+    let msgDate = new Date(msg.sentAt);
+    let year = msgDate.getUTCFullYear();
+    let month = msgDate.getUTCMonth();
+    let day = msgDate.getUTCDate();
 
-//     let dayOfTheYear = new Date(Date.UTC(year, month, day)).toISOString();
-//     console.log(year, month, day, dayOfTheYear);
+    let dayOfTheYear = new Date(Date.UTC(year, month, day)).toISOString();
 
-//     if (!response.some((dayObj) => dayObj.day === dayOfTheYear)) {
-//       response.push({
-//         day: dayOfTheYear,
-//         messages: [msg],
-//       });
-//     } else {
-//       let dayIndex = response.findIndex((el) => el.day === dayOfTheYear);
-//       response[dayIndex].messages.push(msg);
-//     }
-//   });
+    if (!response.some((dayObj) => dayObj.day === dayOfTheYear)) {
+      response.push({
+        day: dayOfTheYear,
+        messages: [msg],
+      });
+    } else {
+      let dayIndex = response.findIndex((el) => el.day === dayOfTheYear);
+      response[dayIndex].messages.push(msg);
+    }
+  });
 
-//   const sortedResponse = response.sort(
-//     (dateA, dateB) => Date.parse(dateA.day) - Date.parse(dateB.day)
-//   );
+  const sortedResponse = response.sort(
+    (dateA, dateB) => Date.parse(dateA.day) - Date.parse(dateB.day)
+  );
 
-//   sortedResponse.forEach((element) => {
-//     element.messages.sort(
-//       (msgA, msgB) => Date.parse(msgA.sentAt) - Date.parse(msgB.sentAt)
-//     );
-//   });
+  sortedResponse.forEach((element) => {
+    element.messages.sort(
+      (msgA, msgB) => Date.parse(msgA.sentAt) - Date.parse(msgB.sentAt)
+    );
+  });
 
-//   return sortedResponse;
-// }
+  return sortedResponse;
+}
 
 // used interfaces, do not touch
 export interface Message {

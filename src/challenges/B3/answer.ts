@@ -12,40 +12,40 @@
 
 // ✅ DONE
 
-// export default function ({
-//   groups,
-// }: {
-//   groups: GroupWithSills[];
-// }): GroupWithSillsAndClosestGroups[] {
-//   let groupsCopy: GroupWithSillsAndClosestGroups[] = [];
-//   for (let i = 0; i < groups.length; i++) {
-//     let lastBestMatchCount = 0;
-//     let bestMatchingGroups: GroupWithSills[] = [];
+export default function ({
+  groups,
+}: {
+  groups: GroupWithSills[];
+}): GroupWithSillsAndClosestGroups[] {
+  let groupsCopy: GroupWithSillsAndClosestGroups[] = [];
+  for (let i = 0; i < groups.length; i++) {
+    let lastBestMatchCount = 0;
+    let bestMatchingGroups: GroupWithSills[] = [];
 
-//     for (let j = 0; j < groups.length; j++) {
-//       if (i === j) continue;
-//       let matchingCount = 0;
+    for (let j = 0; j < groups.length; j++) {
+      if (i === j) continue;
+      let matchingCount = 0;
 
-//       groups[i].skills.forEach((skill) => {
-//         if (groups[j].skills.some((s) => s === skill)) {
-//           matchingCount++;
-//         }
-//       });
+      groups[i].skills.forEach((skill) => {
+        if (groups[j].skills.some((s) => s === skill)) {
+          matchingCount++;
+        }
+      });
 
-//       if (matchingCount > lastBestMatchCount) {
-//         bestMatchingGroups = [groups[j]];
-//         lastBestMatchCount = matchingCount;
-//       } else if (matchingCount === lastBestMatchCount) {
-//         bestMatchingGroups = [...bestMatchingGroups, groups[j]];
-//       }
-//     }
-//     groupsCopy[i] = {
-//       ...groups[i],
-//       closestGroups: bestMatchingGroups,
-//     };
-//   }
-//   return groupsCopy;
-// }
+      if (matchingCount > lastBestMatchCount) {
+        bestMatchingGroups = [groups[j]];
+        lastBestMatchCount = matchingCount;
+      } else if (matchingCount === lastBestMatchCount) {
+        bestMatchingGroups = [...bestMatchingGroups, groups[j]];
+      }
+    }
+    groupsCopy[i] = {
+      ...groups[i],
+      closestGroups: bestMatchingGroups,
+    };
+  }
+  return groupsCopy;
+}
 
 // used interfaces, do not touch
 export interface GroupWithSills {

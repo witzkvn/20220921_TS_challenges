@@ -10,21 +10,21 @@
 
 // ✅ DONE
 
-// export default function ({
-//   events,
-// }: {
-//   events: EventWithCategory[];
-// }): string[] {
-//   const categories: string[] = [];
-//   events.forEach((element) => {
-//     element.categories.forEach((cat) => {
-//       if (!categories.includes(cat)) {
-//         categories.push(cat);
-//       }
-//     });
-//   });
-//   return categories.sort();
-// }
+export default function ({
+  events,
+}: {
+  events: EventWithCategory[];
+}): string[] {
+  const categories: string[] = [];
+  events.forEach((element) => {
+    element.categories.forEach((cat) => {
+      if (!categories.includes(cat)) {
+        categories.push(cat);
+      }
+    });
+  });
+  return categories.sort();
+}
 
 // used interfaces, do not touch
 export interface EventWithCategory {

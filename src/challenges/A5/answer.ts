@@ -24,52 +24,52 @@
 
 // ✅ DONE
 
-// export default function ({ events }: { events: Event[] }): PlanningSlot[] {
-//   const dayPlanning: PlanningSlot[] = [];
-//   const days = [
-//     "Monday",
-//     "Tuesday",
-//     "Wednesday",
-//     "Thursday",
-//     "Friday",
-//     "Saturday",
-//     "Sunday",
-//   ];
-//   days.forEach((day) => {
-//     for (let i = 0; i < 24; i++) {
-//       let planningSlot = {
-//         day: day,
-//         startTime: formattedHours(i),
-//         endTime: formattedHours(i + 1),
-//       };
-//       dayPlanning.push(planningSlot);
-//     }
-//   });
+export default function ({ events }: { events: Event[] }): PlanningSlot[] {
+  const dayPlanning: PlanningSlot[] = [];
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  days.forEach((day) => {
+    for (let i = 0; i < 24; i++) {
+      let planningSlot = {
+        day: day,
+        startTime: formattedHours(i),
+        endTime: formattedHours(i + 1),
+      };
+      dayPlanning.push(planningSlot);
+    }
+  });
 
-//   events.forEach((ev) => {
-//     let planningStartIndex = dayPlanning.findIndex(
-//       (el) => ev.day === el.day && ev.startTime === el.startTime
-//     );
-//     let planningEndIndex = dayPlanning.findIndex(
-//       (el) => ev.day === el.day && ev.endTime === el.endTime
-//     );
+  events.forEach((ev) => {
+    let planningStartIndex = dayPlanning.findIndex(
+      (el) => ev.day === el.day && ev.startTime === el.startTime
+    );
+    let planningEndIndex = dayPlanning.findIndex(
+      (el) => ev.day === el.day && ev.endTime === el.endTime
+    );
 
-//     for (let index = planningStartIndex; index <= planningEndIndex; index++) {
-//       dayPlanning[index].event = ev;
-//     }
-//   });
-//   return dayPlanning;
-// }
+    for (let index = planningStartIndex; index <= planningEndIndex; index++) {
+      dayPlanning[index].event = ev;
+    }
+  });
+  return dayPlanning;
+}
 
-// const formattedHours = (hour: number): string => {
-//   if (hour < 10) {
-//     return `0${hour}:00`;
-//   } else if (hour === 24) {
-//     return `00:00`;
-//   } else {
-//     return `${hour}:00`;
-//   }
-// };
+const formattedHours = (hour: number): string => {
+  if (hour < 10) {
+    return `0${hour}:00`;
+  } else if (hour === 24) {
+    return `00:00`;
+  } else {
+    return `${hour}:00`;
+  }
+};
 
 // used interfaces, do not touch
 export interface Event {

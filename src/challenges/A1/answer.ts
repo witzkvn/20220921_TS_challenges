@@ -10,19 +10,19 @@
 
 // ✅ DONE
 
-// export default function ({ students }: { students: Student[] }): Student[] {
-//   const studentsCopy = [...students];
-//   // sort : a - b < 0 : a first; a - b > 0 : b first; if = 0 : continue comparison
-//   studentsCopy.sort((a, b) => {
-//     let diffAge = a.age - b.age;
-//     if (diffAge) return diffAge;
+export default function ({ students }: { students: Student[] }): Student[] {
+  const studentsCopy = [...students];
+  // sort : a - b < 0 : a first; a - b > 0 : b first; if = 0 : continue comparison
+  studentsCopy.sort((a, b) => {
+    let diffAge = a.age - b.age;
+    if (diffAge) return diffAge;
 
-//     // if tie, compare name
-//     return a.name.localeCompare(b.name);
-//   });
+    // if tie, compare name
+    return a.name.localeCompare(b.name);
+  });
 
-//   return studentsCopy;
-// }
+  return studentsCopy;
+}
 
 // used interfaces, do not touch
 export interface Student {

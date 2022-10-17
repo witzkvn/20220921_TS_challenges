@@ -12,29 +12,29 @@
 
 // ✅ DONE
 
-// export default function ({ groups }: { groups: Group[] }): GroupWithSills[] {
-//   let result: GroupWithSills[] = [];
+export default function ({ groups }: { groups: Group[] }): GroupWithSills[] {
+  let result: GroupWithSills[] = [];
 
-//   for (let group of groups) {
-//     const skillsList: string[] = [];
-//     group.students.map((stud) => {
-//       stud.skills.forEach((skill) => {
-//         if (!skillsList.includes(skill)) {
-//           skillsList.push(skill);
-//         }
-//       });
-//     });
-//     skillsList.sort();
+  for (let group of groups) {
+    const skillsList: string[] = [];
+    group.students.map((stud) => {
+      stud.skills.forEach((skill) => {
+        if (!skillsList.includes(skill)) {
+          skillsList.push(skill);
+        }
+      });
+    });
+    skillsList.sort();
 
-//     result.push({
-//       name: group.name,
-//       students: group.students,
-//       skills: skillsList,
-//     });
-//   }
+    result.push({
+      name: group.name,
+      students: group.students,
+      skills: skillsList,
+    });
+  }
 
-//   return result;
-// }
+  return result;
+}
 
 // used interfaces, do not touch
 interface Student {

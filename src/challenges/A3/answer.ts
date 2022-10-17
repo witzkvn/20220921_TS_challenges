@@ -13,24 +13,24 @@
 
 // ✅ DONE
 
-// export default function ({
-//   lastActivityDatetime,
-//   messages,
-// }: {
-//   lastActivityDatetime: string;
-//   messages: Message[];
-// }): MessageWithUnread[] {
-//   const msgWithUnread: MessageWithUnread[] = messages.map((msg) => {
-//     let isUnread = msg.sentAt <= lastActivityDatetime ? false : true;
-//     return {
-//       ...msg,
-//       unread: isUnread,
-//     };
-//   });
-//   return msgWithUnread.sort(
-//     (msgA, msgB) => Date.parse(msgA.sentAt) - Date.parse(msgB.sentAt)
-//   );
-// }
+export default function ({
+  lastActivityDatetime,
+  messages,
+}: {
+  lastActivityDatetime: string;
+  messages: Message[];
+}): MessageWithUnread[] {
+  const msgWithUnread: MessageWithUnread[] = messages.map((msg) => {
+    let isUnread = msg.sentAt <= lastActivityDatetime ? false : true;
+    return {
+      ...msg,
+      unread: isUnread,
+    };
+  });
+  return msgWithUnread.sort(
+    (msgA, msgB) => Date.parse(msgA.sentAt) - Date.parse(msgB.sentAt)
+  );
+}
 
 // used interfaces, do not touch
 export interface Message {

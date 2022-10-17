@@ -11,26 +11,26 @@
 
 // ✅ DONE
 
-// export default function ({
-//   events,
-// }: {
-//   events: EventDatetime[];
-// }): EventDatetime[] {
-//   const sortedEvents = events.sort((evA, evB) => {
-//     let diffTime =
-//       Date.parse(evA.startDatetime) - Date.parse(evB.startDatetime);
-//     if (diffTime) return diffTime;
+export default function ({
+  events,
+}: {
+  events: EventDatetime[];
+}): EventDatetime[] {
+  const sortedEvents = events.sort((evA, evB) => {
+    let diffTime =
+      Date.parse(evA.startDatetime) - Date.parse(evB.startDatetime);
+    if (diffTime) return diffTime;
 
-//     let evADuration =
-//       Date.parse(evA.endDatetime) - Date.parse(evA.startDatetime);
-//     let evBDuration =
-//       Date.parse(evB.endDatetime) - Date.parse(evB.startDatetime);
+    let evADuration =
+      Date.parse(evA.endDatetime) - Date.parse(evA.startDatetime);
+    let evBDuration =
+      Date.parse(evB.endDatetime) - Date.parse(evB.startDatetime);
 
-//     if (evADuration < evBDuration) return -1;
-//     return 1;
-//   });
-//   return sortedEvents;
-// }
+    if (evADuration < evBDuration) return -1;
+    return 1;
+  });
+  return sortedEvents;
+}
 
 // used interfaces, do not touch
 export interface EventDatetime {

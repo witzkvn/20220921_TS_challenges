@@ -34,54 +34,53 @@
 
 // ✅ DONE
 
-// export default function ({ video }: { video: VideoWithNotes }): VideoSegment[] {
-//   const sortedNotes = video.notes.sort(
-//     (noteA, noteB) =>
-//       strToDate(noteA.fromTime).getTime() - strToDate(noteB.fromTime).getTime()
-//   );
+export default function ({ video }: { video: VideoWithNotes }): VideoSegment[] {
+  const sortedNotes = video.notes.sort(
+    (noteA, noteB) =>
+      strToDate(noteA.fromTime).getTime() - strToDate(noteB.fromTime).getTime()
+  );
 
-//   const result: VideoSegment[] = [];
-//   let nextStartDate = new Date(0);
+  const result: VideoSegment[] = [];
+  let nextStartDate = new Date(0);
 
-//   for (let i = 0; i < sortedNotes.length; i++) {
-//     let note = sortedNotes[i];
-//     let noteStartDate = strToDate(note.fromTime);
+  for (let i = 0; i < sortedNotes.length; i++) {
+    let note = sortedNotes[i];
+    let noteStartDate = strToDate(note.fromTime);
 
-//     if (noteStartDate.getTime() === nextStartDate.getTime()) {
-//       // if start of new note === end of previous, no empty VideoSegment
-//       console.log("HERE");
-//       result.push({
-//         fromTime: note.fromTime,
-//         toTime: note.toTime,
-//         note: note.note,
-//       });
-//       nextStartDate = strToDate(note.toTime);
-//     } else {
-//       // if start of new note !== end of previous, empty VideoSegment from finish of previous to start of new one + new VideoSegment
-//       result.push({
-//         fromTime: dateToStr(nextStartDate),
-//         toTime: note.fromTime,
-//       });
-//       result.push({
-//         fromTime: note.fromTime,
-//         toTime: note.toTime,
-//         note: note.note,
-//       });
+    if (noteStartDate.getTime() === nextStartDate.getTime()) {
+      // if start of new note === end of previous, no empty VideoSegment
+      result.push({
+        fromTime: note.fromTime,
+        toTime: note.toTime,
+        note: note.note,
+      });
+      nextStartDate = strToDate(note.toTime);
+    } else {
+      // if start of new note !== end of previous, empty VideoSegment from finish of previous to start of new one + new VideoSegment
+      result.push({
+        fromTime: dateToStr(nextStartDate),
+        toTime: note.fromTime,
+      });
+      result.push({
+        fromTime: note.fromTime,
+        toTime: note.toTime,
+        note: note.note,
+      });
 
-//       nextStartDate = strToDate(note.toTime);
-//     }
+      nextStartDate = strToDate(note.toTime);
+    }
 
-//     if (i === sortedNotes.length - 1 && note.toTime !== video.videoDuration) {
-//       // if last note and doesn't go to end of video, add last empty segment
-//       result.push({
-//         fromTime: dateToStr(nextStartDate),
-//         toTime: video.videoDuration,
-//       });
-//     }
-//   }
+    if (i === sortedNotes.length - 1 && note.toTime !== video.videoDuration) {
+      // if last note and doesn't go to end of video, add last empty segment
+      result.push({
+        fromTime: dateToStr(nextStartDate),
+        toTime: video.videoDuration,
+      });
+    }
+  }
 
-//   return result;
-// }
+  return result;
+}
 
 const strToDate = (strTime: string): Date => {
   let [durHours, durMinutes, durSeconds] = strTime.split(":");

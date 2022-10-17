@@ -52,43 +52,43 @@
 
 // ✅ DONE
 
-// export default function ({
-//   submissions,
-// }: {
-//   submissions: Submission[];
-// }): MonthSubmission[] {
-//   let result: MonthSubmission[] = [];
-//   submissions.forEach((sub) => {
-//     let subDate = new Date(sub.submittedAt);
-//     let subYear = subDate.getUTCFullYear();
-//     let subMonth = subDate.getUTCMonth();
-//     let subDateStr = new Date(Date.UTC(subYear, subMonth)).toISOString();
+export default function ({
+  submissions,
+}: {
+  submissions: Submission[];
+}): MonthSubmission[] {
+  let result: MonthSubmission[] = [];
+  submissions.forEach((sub) => {
+    let subDate = new Date(sub.submittedAt);
+    let subYear = subDate.getUTCFullYear();
+    let subMonth = subDate.getUTCMonth();
+    let subDateStr = new Date(Date.UTC(subYear, subMonth)).toISOString();
 
-//     if (!result.some((el) => el.month === subDateStr)) {
-//       result.push({
-//         month: subDateStr,
-//         submissions: [sub],
-//       });
-//     } else {
-//       let monthIndex = result.findIndex((el) => el.month === subDateStr);
-//       result[monthIndex] = {
-//         ...result[monthIndex],
-//         submissions: [...result[monthIndex].submissions, sub],
-//       };
-//     }
-//   });
+    if (!result.some((el) => el.month === subDateStr)) {
+      result.push({
+        month: subDateStr,
+        submissions: [sub],
+      });
+    } else {
+      let monthIndex = result.findIndex((el) => el.month === subDateStr);
+      result[monthIndex] = {
+        ...result[monthIndex],
+        submissions: [...result[monthIndex].submissions, sub],
+      };
+    }
+  });
 
-//   result.forEach((el) => {
-//     el.submissions.sort(
-//       (subA, subB) =>
-//         Date.parse(subA.submittedAt) - Date.parse(subB.submittedAt)
-//     );
-//   });
+  result.forEach((el) => {
+    el.submissions.sort(
+      (subA, subB) =>
+        Date.parse(subA.submittedAt) - Date.parse(subB.submittedAt)
+    );
+  });
 
-//   result.sort((monthA, monthB) => monthA.month.localeCompare(monthB.month));
+  result.sort((monthA, monthB) => monthA.month.localeCompare(monthB.month));
 
-//   return result;
-// }
+  return result;
+}
 
 // used interfaces, do not touch
 export interface Submission {
